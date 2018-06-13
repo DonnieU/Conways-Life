@@ -50,6 +50,31 @@ class LifeCanvas extends Component {
     let canvas = this.refs.canvas;
     let ctx = canvas.getContext('2d');
     const cells = this.life.getCells();
+
+    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+    let screenBuffer = imageData.data;
+
+    for (let h = 0; h < canvasHeight; h++) {
+      for (let w = 0; w < canvasWidth; w++) {
+        // convert hw to index
+        let index = (h * canvasWidth + w) * 4;
+        let lifeStatus = cells[h][w];
+
+        // change pixels at index to
+        screenBuffer[index + 0] = COLORS[lifeStatus][0]; // R
+        screenBuffer[index + 1] = COLORS[lifeStatus][1]; // G
+        screenBuffer[index + 2] = COLORS[lifeStatus][2]; // B
+        screenBuffer[index + 3] = 0xFF; // alpha, 0xFF == opaque 
+      }
+    }
+
+    ctx.putImageData(imageData, 0, 0);
+
+    // move simulation forward
+    this.life.step();
+
+    requestAnimationFrame(() => { this.animFrame() });
   }
 
   /**
