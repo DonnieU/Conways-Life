@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import Life from './life';
 import './App.css';
 
+const canvasWidth = 400;
+const canvasHeight = 300;
+
+const COLORS = [
+  [0, 0, 0],
+  [0xff, 0xff, 0xff]
+]
+
 /**
  * Life canvas
  */
@@ -21,7 +29,7 @@ class LifeCanvas extends Component {
    * Component did mount
    */
   componentDidMount() {
-    requestAnimationFrame(() => {this.animFrame()});
+    requestAnimationFrame(() => { this.animFrame() });
   }
 
   /**
@@ -38,6 +46,10 @@ class LifeCanvas extends Component {
     // Convert the cell values into white or black for the canvas
     // Put the new image data back on the canvas
     // Next generation of life
+
+    let canvas = this.refs.canvas;
+    let ctx = canvas.getContext('2d');
+    const cells = this.life.getCells();
   }
 
   /**
@@ -59,7 +71,7 @@ class LifeApp extends Component {
   render() {
     return (
       <div>
-        <LifeCanvas width={400} height={300} />
+        <LifeCanvas width={canvasWidth} height={canvasHeight} />
       </div>
     )
   }

@@ -25,7 +25,20 @@ class Life {
    * Constructor
    */
   constructor(width, height) {
-    // !!!! IMPLEMENT ME !!!!
+    this.width = width;
+    this.height = height;
+
+    this.cells = [
+      Array2D(width, height),
+      Array2D(width, heigh)
+    ];
+
+    this.currentBufferIndex = 0;
+
+    this.randomize();
+
+    this.clear();
+
   }
   
   /**
@@ -34,21 +47,27 @@ class Life {
    * This should NOT be modified by the caller
    */
   getCells() {
-    // !!!! IMPLEMENT ME !!!!
+    return this.cells[this.currentBufferIndex];
   }
 
   /**
    * Clear the life grid
    */
   clear() {
-    // !!!! IMPLEMENT ME !!!!
+    for (let h = 0; h < this.height; h++) {
+      this.cells[this.currentBufferIndex][h].fill(0);
+    }
   }
   
   /**
    * Randomize the life grid
    */
   randomize() {
-    // !!!! IMPLEMENT ME !!!!
+    for (let h = 0; h < this.height; h++) {
+      for (let w = 0; w < this.width; w++) {
+        this.cells[this.currentBufferIndex][h][w] = Math.random() * MODULO | 0;
+      }
+    }
   }
 
   /**

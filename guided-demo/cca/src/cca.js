@@ -75,7 +75,7 @@ class CCA {
    * Run the simulation for a single step
    */
   step() {
-    console.log('inverse currentbBufferIndex', !this.currentBufferIndex);
+    // console.log('inverse currentbBufferIndex', !this.currentBufferIndex);
     let currentBuffer = this.cells[this.currentBufferIndex];
     let backBuffer = this.cells[this.currentBufferIndex === 0 ? 1 : 0];
     
